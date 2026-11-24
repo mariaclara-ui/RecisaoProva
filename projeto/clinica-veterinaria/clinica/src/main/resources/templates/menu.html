@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="menu" class="menu">
+    <a th:href="@{/agendamentos}">Agendamentos</a>
+    <a th:href="@{/tutores}">Tutores</a>
+    <a th:href="@{/pets}">Pets</a>
+    <span class="usuario">Olá, <b th:text="${session.usuario}">Usuário</b></span>
+    <a th:href="@{/sair}">Sair</a>
+</div>
+</body>
+</html>

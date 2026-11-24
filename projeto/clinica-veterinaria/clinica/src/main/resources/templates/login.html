@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+</head>
+<body>
+<div class="caixa-login">
+    <h2>Clínica Veterinária</h2>
+
+    <form th:action="@{/login}" method="post">
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <p class="erro" th:if="${param.erro}">E-mail ou senha inválidos</p>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutores</title>
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+</head>
+<body>
+<div th:replace="~{menu :: menu}"></div>
+
+<div class="conteudo">
+    <h2>Tutores</h2>
+
+    <form th:action="@{/tutores}" method="get">
+        <input type="text" name="termo" th:value="${termo}" placeholder="Buscar tutor pelo nome">
+        <button type="submit">Buscar</button>
+    </form>
+
+
+    <h3>Novo tutor</h3>
+    <form th:action="@{/tutores}" method="post">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cpf" placeholder="CPF" required>
+        <input type="text" name="telefone" placeholder="Telefone" required>
+        <button type="submit">Salvar</button>
+    </form>
+
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+        </tr>
+        <tr th:each="t : ${tutores}">
+            <td th:text="${t.id}"></td>
+            <td th:text="${t.nome}"></td>
+            <td th:text="${t.cpf}"></td>
+            <td th:text="${t.telefone}"></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(tutores)}">
+            <td colspan="4">Nenhum registro encontrado.</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

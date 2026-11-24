@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendamentos</title>
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+</head>
+<body>
+<div th:replace="~{menu :: menu}"></div>
+
+<div class="conteudo">
+    <h2>Agendamentos</h2>
+
+
+    <form th:action="@{/agendamentos}" method="get">
+        <input type="text" name="termo" th:value="${termo}" placeholder="Buscar pelo nome do pet">
+        <button type="submit">Buscar</button>
+    </form>
+
+
+
+    <h3>Novo agendamento</h3>
+    <form th:action="@{/agendamentos}" method="post">
+        <select name="pet.id" required>
+            <option value="">Selecione o pet</option>
+            <option th:each="p : ${pets}" th:value="${p.id}"
+                    th:text="${p.nome} + ' (' + ${p.tutor.nome} + ')'"></option>
+        </select>
+        <input type="datetime-local" name="dataHora" required>
+        <input type="text" name="motivo" placeholder="Motivo" required>
+        <button type="submit">Salvar</button>
+    </form>
+
+
+    <table>
+        <tr>
+            <th>Data/Hora</th>
+            <th>Motivo</th>
+            <th>Pet</th>
+            <th>Espécie</th>
+            <th>Tutor</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+        </tr>
+        <tr th:each="a : ${agendamentos}">
+            <td th:text="${#temporals.format(a.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${a.motivo}"></td>
+            <td th:text="${a.pet.nome}"></td>
+            <td th:text="${a.pet.especie}"></td>
+            <td th:text="${a.pet.tutor.nome}"></td>
+            <td th:text="${a.pet.tutor.cpf}"></td>
+            <td th:text="${a.pet.tutor.telefone}"></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(agendamentos)}">
+            <td colspan="7">Nenhum agendamento encontrado.</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets</title>
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+</head>
+<body>
+<div th:replace="~{menu :: menu}"></div>
+
+<div class="conteudo">
+    <h2>Pets</h2>
+
+    <h3>Novo pet</h3>
+    <form th:action="@{/pets}" method="post">
+        <input type="text" name="nome" placeholder="Nome do pet" required>
+        <input type="text" name="especie" placeholder="Espécie" required>
+
+
+
+        <select name="tutor.id" required>
+            <option value="">Selecione o tutor</option>
+            <option th:each="t : ${tutores}" th:value="${t.id}" th:text="${t.nome}"></option>
+        </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Pet</th>
+            <th>Espécie</th>
+            <th>Tutor</th>
+        </tr>
+        <tr th:each="p : ${pets}">
+            <td th:text="${p.nome}"></td>
+            <td th:text="${p.especie}"></td>
+            <td th:text="${p.tutor.nome}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
